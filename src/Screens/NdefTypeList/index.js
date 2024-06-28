@@ -2,12 +2,27 @@ import * as React from 'react';
 import {ScrollView, Text} from 'react-native';
 import {Appbar, List, TextInput} from 'react-native-paper';
 import * as NfcIcons from '../../Components/NfcIcons';
+import {Button, IconButton} from 'react-native-paper';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
 
 function NdefTypeListScreen(props) {
   const {navigation} = props;
   const [probeName,setProbeName] = React.useState('');
   const [latitude,setLatitude] = React.useState('');
   const [longitude,setLongitude] = React.useState('');
+
+  const writeNdef = async () => {
+
+    let geourl = value;
+    if (latitude !== '' && longitude!=='') {
+      url = 'geo:'+ latitude+','+longitude;
+    }
+
+    await NfcProxy.writeNdef({type: 'URI', value: url});
+  };
+
+
 
   return (
     <>
@@ -17,10 +32,25 @@ function NdefTypeListScreen(props) {
 
       <ScrollView style={{flex: 1, backgroundColor: 'white'}}>
       
-      <TextInput mode="outlined" label="Nazwa próbki" multiline={false} value={probeName} autoCapitalize={false} onChangeText={setProbeName} style={{marginBottom: 10, marginHorizontal:40, marginTop:30}} autoFocus={true}/>
-      <Text style={{marginTop:30, alignItems: 'center', alignSelf:'center'}}>Pozycja GPS</Text>
-      <TextInput mode="outlined" label="Szerokość geograficzna" multiline={false} value={latitude} autoCapitalize={false} onChangeText={setLatitude} style={{marginBottom: 10, marginHorizontal:60, marginTop:30}} autoFocus={true}/>
-      <TextInput mode="outlined" label="Długość geograficzna" multiline={false} value={longitude} autoCapitalize={false} onChangeText={setLongitude} style={{marginBottom: 10, marginHorizontal:60, marginTop:0}} autoFocus={true}/>
+      <TextInput mode="outlined" label="Nazwa próbki" multiline={false} value={probeName}  onChangeText={setProbeName} style={{marginBottom: 10, marginHorizontal:40, marginTop:60}} autoFocus={true}/>
+      
+      <ScrollView horizontal contentContainerStyle={{ flexGrow: 1, justifyContent: 'center', marginTop:30 }}>
+      
+      <Button
+          icon={() => (
+            <Icon name="map-marker" size={22} style={{alignSelf: 'center', color: '#555'}} />
+          )}
+          mode="outlined"
+          onPress={async () => {
+            setEnabled(await NfcProxy.isEnabled());
+          }}>
+          Ustal Pozycję GPS
+        </Button>
+      </ScrollView>
+
+
+      <TextInput mode="outlined" label="Szerokość geograficzna" multiline={false} value={latitude} onChangeText={setLatitude} style={{marginBottom: 10, marginHorizontal:60, marginTop:30}} autoFocus={true}/>
+      <TextInput mode="outlined" label="Długość geograficzna" multiline={false} value={longitude} onChangeText={setLongitude} style={{marginBottom: 10, marginHorizontal:60, marginTop:0}} autoFocus={true}/>
 
         
       </ScrollView>
