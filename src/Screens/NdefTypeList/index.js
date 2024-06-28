@@ -4,7 +4,8 @@ import {Appbar, List, TextInput} from 'react-native-paper';
 import * as NfcIcons from '../../Components/NfcIcons';
 import {Button, IconButton} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-
+import GetLocation from 'react-native-get-location'
+import { PermissionsAndroid } from 'react-native';
 
 function NdefTypeListScreen(props) {
   const {navigation} = props;
@@ -24,6 +25,55 @@ function NdefTypeListScreen(props) {
 
 
 
+  async function requestLocation() {
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        {
+          'title': 'Location Permission',
+          'message': 'This App needs access to your location ' +
+                     'so we can know where you are.'
+        }
+      )
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        console.log("You can use locations ")
+        checkLocation();
+      } else {
+        console.log("Location permission denied")
+        console.log(granted)
+      }
+    } catch (err) {
+      console.warn(err)
+    }
+  }
+
+
+  const checkLocation = () => {
+    
+    GetLocation.getCurrentPosition({
+      enableHighAccuracy: true,
+      timeout: 60000,
+      rationale: {
+        title: 'Location permission',
+        message: 'The app needs the permission to request your location.',
+        buttonPositive: 'Ok',
+      },
+  })
+  .then(location => {
+      console.log(location);
+      setLatitude(location.latitude.toFixed(7));
+      setLongitude(location.longitude.toFixed(7));
+
+  })
+  .catch(error => {
+      const { code, message } = error;
+      //requestLocation();
+      console.warn(code, message);
+  })
+    
+  };
+
+
   return (
     <>
       <Appbar.Header style={{backgroundColor: 'white'}}>
@@ -41,9 +91,7 @@ function NdefTypeListScreen(props) {
             <Icon name="map-marker" size={22} style={{alignSelf: 'center', color: '#555'}} />
           )}
           mode="outlined"
-          onPress={async () => {
-            setEnabled(await NfcProxy.isEnabled());
-          }}>
+          onPress={requestLocation}>
           Ustal Pozycję GPS
         </Button>
       </ScrollView>
