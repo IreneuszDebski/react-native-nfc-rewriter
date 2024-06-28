@@ -6,6 +6,7 @@ import {Button, IconButton} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import GetLocation from 'react-native-get-location'
 import { PermissionsAndroid } from 'react-native';
+//import Geolocation from '@react-native-community/geolocation';
 
 function NdefTypeListScreen(props) {
   const {navigation} = props;
@@ -32,7 +33,10 @@ function NdefTypeListScreen(props) {
         {
           'title': 'Location Permission',
           'message': 'This App needs access to your location ' +
-                     'so we can know where you are.'
+                     'so we can know where you are.',
+        buttonNeutral: 'Ask Me Later',
+        buttonNegative: 'Cancel',
+        buttonPositive: 'OK',
         }
       )
       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
@@ -74,6 +78,7 @@ function NdefTypeListScreen(props) {
   };
 
 
+
   return (
     <>
       <Appbar.Header style={{backgroundColor: 'white'}}>
@@ -97,8 +102,8 @@ function NdefTypeListScreen(props) {
       </ScrollView>
 
 
-      <TextInput mode="outlined" label="Szerokość geograficzna" multiline={false} value={latitude} onChangeText={setLatitude} style={{marginBottom: 10, marginHorizontal:60, marginTop:30}} autoFocus={true}/>
-      <TextInput mode="outlined" label="Długość geograficzna" multiline={false} value={longitude} onChangeText={setLongitude} style={{marginBottom: 10, marginHorizontal:60, marginTop:0}} autoFocus={true}/>
+      <TextInput mode="outlined" label="Szerokość geograficzna" multiline={false} value={latitude} onChangeText={setLatitude} style={{marginBottom: 10, marginHorizontal:60, marginTop:30}} autoFocus={false}/>
+      <TextInput mode="outlined" label="Długość geograficzna" multiline={false} value={longitude} onChangeText={setLongitude} style={{marginBottom: 10, marginHorizontal:60, marginTop:0}} autoFocus={false}/>
 
         
       </ScrollView>
