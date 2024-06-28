@@ -35,7 +35,7 @@ function HomeTabNav() {
         const extraProps = {};
         if (focusedName !== undefined) {
           if (focusedName !== 'Home' && focusedName !== 'Assistant') {
-            extraProps.tabBarStyle = {height: 0, display: 'none'};
+            //extraProps.tabBarStyle = {height: 0, display: 'none'};
           }
         }
 
@@ -64,22 +64,12 @@ function HomeTabNav() {
       <HomeTabs.Screen
         name="HomeTab"
         component={HomeScreen}
-        options={{tabBarLabel: 'SCAN TAG'}}
+        options={{tabBarLabel: 'Odczytaj NFC'}}
       />
       <HomeTabs.Screen
         name="NdefTypeListTab"
         component={NdefTypeListScreen}
-        options={{title: 'WRITE NDEF'}}
-      />
-      <HomeTabs.Screen
-        name="ToolKitTab"
-        component={ToolKitScreen}
-        options={{title: 'TOOLKIT'}}
-      />
-      <HomeTabs.Screen
-        name="MyRecordsTab"
-        component={SavedRecordScreen}
-        options={{title: 'MY RECORDS'}}
+        options={{title: 'Zapisz NFC'}}
       />
     </HomeTabs.Navigator>
   );
@@ -91,7 +81,7 @@ function Main(props) {
       screenOptions={{
         header: (headerProps) => {
           const {navigation, back, options, route} = headerProps;
-          const excludedScreens = ['Home', 'NdefWrite', 'CustomTransceive'];
+          const excludedScreens = ['Home', 'NdefWrite', 'CustomTransceive','SavedRecord'];
 
           if (excludedScreens.findIndex((name) => name === route?.name) > -1) {
             return null;

@@ -18,6 +18,7 @@ function LandingScreen(props) {
 
   React.useEffect(() => {
     async function initialize() {
+      /*
       Animated.timing(opacityAnimValue, {
         duration: 1000,
         toValue: 1,
@@ -40,7 +41,7 @@ function LandingScreen(props) {
       ]).start();
 
       await delay(500);
-
+      */  
       await AppContext.Actions.initStorage();
 
       const success = await NfcProxy.init();
@@ -70,7 +71,7 @@ function LandingScreen(props) {
 
       {isNfcSupported === false ? (
         <Text style={{fontSize: 24, padding: 20}}>
-          Your device doesn't support NFC
+          Ten telefon nie obsługuje NFC
         </Text>
       ) : (
         <ActivityIndicator size="large" style={{marginTop: 50}} />

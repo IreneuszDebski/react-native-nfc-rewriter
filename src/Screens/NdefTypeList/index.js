@@ -1,113 +1,28 @@
 import * as React from 'react';
 import {ScrollView, Text} from 'react-native';
-import {Appbar, List} from 'react-native-paper';
+import {Appbar, List, TextInput} from 'react-native-paper';
 import * as NfcIcons from '../../Components/NfcIcons';
 
 function NdefTypeListScreen(props) {
   const {navigation} = props;
+  const [probeName,setProbeName] = React.useState('');
+  const [latitude,setLatitude] = React.useState('');
+  const [longitude,setLongitude] = React.useState('');
 
   return (
     <>
       <Appbar.Header style={{backgroundColor: 'white'}}>
-        <Text style={{marginLeft: 10, fontSize: 24}}>WRITE NDEF</Text>
+        <Text style={{marginLeft: 10, fontSize: 24}}>Zapisz dane do tagu NFC</Text>
       </Appbar.Header>
 
       <ScrollView style={{flex: 1, backgroundColor: 'white'}}>
-        <List.Section>
-          <List.Subheader>Well Known</List.Subheader>
-          <List.Item
-            title="TEXT"
-            description="Write text into NFC tags"
-            left={NfcIcons.TxtIcon}
-            onPress={() =>
-              navigation.navigate('Main', {
-                screen: 'NdefWrite',
-                params: {ndefType: 'TEXT'},
-              })
-            }
-          />
-          <List.Item
-            title="Link"
-            description="Write web link or uri into NFC tags"
-            left={NfcIcons.UriIcon}
-            onPress={() =>
-              navigation.navigate('Main', {
-                screen: 'NdefWrite',
-                params: {ndefType: 'URI'},
-              })
-            }
-          />
+      
+      <TextInput mode="outlined" label="Nazwa próbki" multiline={false} value={probeName} autoCapitalize={false} onChangeText={setProbeName} style={{marginBottom: 10, marginHorizontal:40, marginTop:30}} autoFocus={true}/>
+      <Text style={{marginTop:30, alignItems: 'center', alignSelf:'center'}}>Pozycja GPS</Text>
+      <TextInput mode="outlined" label="Szerokość geograficzna" multiline={false} value={latitude} autoCapitalize={false} onChangeText={setLatitude} style={{marginBottom: 10, marginHorizontal:60, marginTop:30}} autoFocus={true}/>
+      <TextInput mode="outlined" label="Długość geograficzna" multiline={false} value={longitude} autoCapitalize={false} onChangeText={setLongitude} style={{marginBottom: 10, marginHorizontal:60, marginTop:0}} autoFocus={true}/>
 
-          <List.Item
-            title="TEL"
-            description="Write number into NFC tags to make phone call"
-            left={NfcIcons.TelIcon}
-            onPress={() =>
-              navigation.navigate('Main', {
-                screen: 'NdefWrite',
-                params: {
-                  ndefType: 'URI',
-                  scheme: 'tel:',
-                },
-              })
-            }
-          />
-
-          <List.Item
-            title="SMS"
-            description="Write number into NFC tags to send SMS"
-            left={NfcIcons.SmsIcon}
-            onPress={() =>
-              navigation.navigate('Main', {
-                screen: 'NdefWrite',
-                params: {
-                  ndefType: 'URI',
-                  scheme: 'sms:',
-                },
-              })
-            }
-          />
-
-          <List.Item
-            title="EMAIL"
-            description="Write email into NFC tags"
-            left={NfcIcons.EmailIcon}
-            onPress={() =>
-              navigation.navigate('Main', {
-                screen: 'NdefWrite',
-                params: {
-                  ndefType: 'URI',
-                  scheme: 'mailto:',
-                },
-              })
-            }
-          />
-
-          <List.Subheader>MIME</List.Subheader>
-          <List.Item
-            title="WiFi Simple Record"
-            description="Connect to your WiFi AP"
-            left={NfcIcons.WifiIcon}
-            onPress={() =>
-              navigation.navigate('Main', {
-                screen: 'NdefWrite',
-                params: {ndefType: 'WIFI_SIMPLE'},
-              })
-            }
-          />
-
-          <List.Item
-            title="vCard"
-            description="Write contact records. Please beaware vCard format is not supported by iOS natively"
-            left={NfcIcons.ContactIcon}
-            onPress={() =>
-              navigation.navigate('Main', {
-                screen: 'NdefWrite',
-                params: {ndefType: 'VCARD'},
-              })
-            }
-          />
-        </List.Section>
+        
       </ScrollView>
     </>
   );

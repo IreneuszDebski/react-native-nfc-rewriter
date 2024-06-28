@@ -17,12 +17,14 @@ import NfcManager, {NfcEvents, NfcTech} from 'react-native-nfc-manager';
 import {Button, IconButton} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import qs from 'query-string';
+import {version} from '../../../package.json';
+
 
 function HomeScreen(props) {
   const {navigation} = props;
   const [enabled, setEnabled] = React.useState(null);
   const padding = 40;
-  const width = Dimensions.get('window').width - 2 * padding;
+  const width = Dimensions.get('window').width - 4 * padding;
 
   React.useEffect(() => {
     async function initNfc() {
@@ -139,7 +141,7 @@ function HomeScreen(props) {
         });
       } catch (ex) {
         console.warn(ex);
-        Alert.alert('ERROR', 'fail to init NFC', [{text: 'OK'}]);
+        Alert.alert('ERROR', 'Błąd inicjalizacji NFC', [{text: 'OK'}]);
       }
     }
 
@@ -156,9 +158,10 @@ function HomeScreen(props) {
           right: 0,
           justifyContent: 'center',
           alignItems: 'center',
-          marginBottom: 20,
+          marginBottom: 60,
+          
         }}>
-        <Button
+        <Button buttonColor='#00aa40' 
           mode="contained"
           onPress={async () => {
             const tag = await NfcProxy.readTag();
@@ -167,7 +170,7 @@ function HomeScreen(props) {
             }
           }}
           style={{width}}>
-          SCAN NFC TAG
+          Odczytaj tag NFC
         </Button>
       </View>
     );
@@ -216,7 +219,7 @@ function HomeScreen(props) {
             alignItems: 'center',
           }}>
           <Image
-            source={require('../../../images/nfc-rewriter-icon.png')}
+            source={require('../../../images/agro-logo.png')}
             style={{width: 250, height: 250}}
             resizeMode="contain"
           />
@@ -228,67 +231,20 @@ function HomeScreen(props) {
               textAlign: 'center',
               color: '#666',
             }}>
-            Open Source NFC Reader/Writer
+            Czytnik tagów NFC
           </Text>
-
-          <TouchableOpacity
-            onPress={() =>
-              Linking.openURL(
-                'https://github.com/revtel/react-native-nfc-rewriter',
-              )
-            }
+          <Text
             style={{
-              paddingHorizontal: 20,
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginBottom: 10,
+              padding: 0,
+              fontSize: 12,
+              fontWeight: 'normal',
+              textAlign: 'center',
+              color: '#555',
             }}>
-            <Icon name="github" size={18} color={'#888'} />
-            <Text style={{marginLeft: 6, color: '#888'}}>
-              Github Repo (App)
-            </Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() =>
-              Linking.openURL(
-                'https://github.com/revtel/react-native-nfc-manager',
-              )
-            }
-            style={{
-              paddingHorizontal: 20,
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginBottom: 10,
-            }}>
-            <Icon name="github" size={18} color={'#888'} />
-            <Text style={{marginLeft: 6, color: '#888'}}>
-              Github Repo (Library)
-            </Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() => Linking.openURL('mailto:nfctogo@gmail.com')}
-            style={{
-              paddingHorizontal: 20,
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
-            <Icon name="email" size={18} color={'#888'} />
-            <Text style={{marginLeft: 6, color: '#888'}}>Contact Us</Text>
-          </TouchableOpacity>
+            ver. {version}
+          </Text>
         </View>
 
-        <IconButton
-          icon={() => <Icon name="cog" size={32} />}
-          style={styles.settingIcon}
-          onPress={() => {
-            navigation.navigate('Settings');
-          }}
-        />
 
         {enabled ? renderNfcButtons() : renderNfcNotEnabled()}
       </View>
