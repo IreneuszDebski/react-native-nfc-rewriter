@@ -106,11 +106,13 @@ function HomeScreen(props) {
         if (bgTag) {
           onBackgroundTag(bgTag);
         } else {
+          /*
           const link = await Linking.getInitialURL();
           console.warn('DEEP LINK', link);
           if (link) {
             onDeepLink(link, true);
           }
+          */
         }
 
         // listen to other background tags after the app launched

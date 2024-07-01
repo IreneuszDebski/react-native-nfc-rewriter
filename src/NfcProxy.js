@@ -21,7 +21,7 @@ const withAndroidPrompt = (fn) => {
       if (Platform.OS === 'android') {
         getOutlet('androidPrompt').update({
           visible: true,
-          message: 'Ready to scan NFC',
+          message: 'Zbliż token NFC',
         });
       }
 
@@ -95,6 +95,8 @@ class NfcProxy {
 
       NfcManager.setEventListener(NfcEvents.DiscoverTag, (tag) => {
         tagFound = tag;
+        console.log('TAG_ONCE');
+        console.log(tag);
         resolve(tagFound);
 
         if (Platform.OS === 'ios') {
@@ -127,6 +129,9 @@ class NfcProxy {
 
       tag = await NfcManager.getTag();
       tag.ndefStatus = await NfcManager.ndefHandler.getNdefStatus();
+      console.log('TAG');
+      console.log(tag);
+
 
       if (Platform.OS === 'ios') {
         await NfcManager.setAlertMessageIOS('Success');
@@ -146,7 +151,7 @@ class NfcProxy {
 
     try {
       await NfcManager.requestTechnology(NfcTech.Ndef, {
-        alertMessage: 'Ready to write some NDEF',
+        alertMessage: 'Gotowy do Zapisu',
       });
 
       let bytes = null;
@@ -165,6 +170,8 @@ class NfcProxy {
         ]);
       }
 
+      console.log('Bytes to write');
+      console.log(bytes);
       if (bytes) {
         await NfcManager.ndefHandler.writeNdefMessage(bytes);
 
@@ -182,6 +189,70 @@ class NfcProxy {
 
     return result;
   });
+
+
+  writeTextAndURI = withAndroidPrompt(async ({vtext,vuri}) => {
+    let result = false;
+
+    try {
+      await NfcManager.requestTechnology(NfcTech.Ndef, {
+        alertMessage: 'Gotowy do Zapisu',
+      });
+
+      
+      
+      let ndeftext=Ndef.encodeMessage([Ndef.textRecord(vtext)]);
+      let ndefuri=Ndef.encodeMessage([Ndef.uriRecord(vuri)]);
+      let combined=Ndef.encodeMessage([Ndef.textRecord(vtext), Ndef.uriRecord(vuri)]);
+
+      
+      if (combined) {
+        await NfcManager.ndefHandler.writeNdefMessage(combined);
+
+        if (Platform.OS === 'ios') {
+          await NfcManager.setAlertMessageIOS('Success');
+        }
+
+        result = true;
+      }
+    } catch (ex) {
+      handleException(ex);
+    } finally {
+      NfcManager.cancelTechnologyRequest();
+    }
+
+    return result;
+  });
+
+
+  writeBytes = withAndroidPrompt(async ({data}) => {
+    let result = false;
+
+    try {
+      await NfcManager.requestTechnology(NfcTech.Ndef, {
+        alertMessage: 'Gotowy do Zapisu',
+      });
+
+  
+      
+      if (data) {
+        await NfcManager.ndefHandler.writeNdefMessage(data);
+
+        if (Platform.OS === 'ios') {
+          await NfcManager.setAlertMessageIOS('Success');
+        }
+
+        result = true;
+      }
+    } catch (ex) {
+      handleException(ex);
+    } finally {
+      NfcManager.cancelTechnologyRequest();
+    }
+
+    return result;
+  });
+
 
   customTransceiveNfcA = withAndroidPrompt(async (commands, onPostExecute) => {
     let result = false;
