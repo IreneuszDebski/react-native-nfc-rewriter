@@ -63,7 +63,7 @@ function Toast(props) {
           (type === 'alert' && styles.alertContent) || styles.successContent,
           {flexDirection: 'row', alignItems: 'center'},
         ]}>
-        {console.log('type:', type)}
+        
 
         <Text>{text}</Text>
       </View>

@@ -218,14 +218,11 @@ function createNdefRecord(tnf, type, id, payload) {
         }
       )
       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        console.log("You can use locations ")
+        
         checkLocation();
       } else {
-        console.log("Location permission denied")
-        console.log(granted)
       }
     } catch (err) {
-      console.warn(err)
     }
   }
 
@@ -242,15 +239,13 @@ function createNdefRecord(tnf, type, id, payload) {
       },
   })
   .then(location => {
-      console.log(location);
+      
       setLatitude(location.latitude.toFixed(7));
       setLongitude(location.longitude.toFixed(7));
 
   })
   .catch(error => {
       const { code, message } = error;
-      console.log('error on get position');
-      console.warn(code, message);
   })
     
   };
@@ -267,19 +262,14 @@ function createNdefRecord(tnf, type, id, payload) {
           message: 'This app needs access to your location',
         },
       );
-      console.log('Granted looks like');
-      console.log(granted);
 
       if (granted==="granted") {
-        console.log('You can use the location');
         checkLocation();
         return true;
       } else {
-        console.log('Location permission denied');
         return false;
       }
     } catch (err) {
-      console.warn(err);
     }
   };
 

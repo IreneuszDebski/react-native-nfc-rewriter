@@ -57,7 +57,7 @@ const handleException = (ex) => {
   } else if (ex instanceof NfcError.Timeout) {
     Alert.alert('NFC Session Timeout');
   } else {
-    console.warn(ex);
+    //console.warn(ex);
 
     if (Platform.OS === 'ios') {
       NfcManager.invalidateSessionWithErrorIOS(`${ex}`);
@@ -95,8 +95,6 @@ class NfcProxy {
 
       NfcManager.setEventListener(NfcEvents.DiscoverTag, (tag) => {
         tagFound = tag;
-        console.log('TAG_ONCE');
-        console.log(tag);
         resolve(tagFound);
 
         if (Platform.OS === 'ios') {
@@ -136,7 +134,7 @@ class NfcProxy {
       }
     } catch (ex) {
       // for tag reading, we don't actually need to show any error
-      console.log(ex);
+      
     } finally {
       NfcManager.cancelTechnologyRequest();
     }
@@ -168,8 +166,7 @@ class NfcProxy {
         ]);
       }
 
-      console.log('Bytes to write');
-      console.log(bytes);
+
       if (bytes) {
         await NfcManager.ndefHandler.writeNdefMessage(bytes);
 
@@ -273,11 +270,6 @@ class NfcProxy {
         const {type, payload} = modifiedCommand || command;
         let resp = null;
         if (type === 'command') {
-          console.warn(
-            payload
-              .map((byte) => ('00' + byte.toString(16)).slice(-2))
-              .join(' '),
-          );
           resp = await NfcManager.nfcAHandler.transceive(payload);
         } else if (type === 'delay') {
           await delay(payload);
@@ -355,15 +347,7 @@ class NfcProxy {
         for (const {type, payload} of commands) {
           let resp = null;
           if (type === 'command') {
-            console.log(
-              '>>> ' +
-                payload.map((b) => ('00' + b.toString(16)).slice(-2)).join(' '),
-            );
             resp = await NfcManager.isoDepHandler.transceive(payload);
-            console.log(
-              '<<< ' +
-                resp.map((b) => ('00' + b.toString(16)).slice(-2)).join(' '),
-            );
           } else if (type === 'delay') {
             await delay(payload);
           }
@@ -380,7 +364,7 @@ class NfcProxy {
           await onPostExecute([result, responses]);
         }
       } catch (ex) {
-        console.warn(ex);
+        
         handleException(ex);
       } finally {
         NfcManager.cancelTechnologyRequest();
@@ -400,15 +384,7 @@ class NfcProxy {
       for (const {type, payload} of commands) {
         let resp = null;
         if (type === 'command') {
-          console.log(
-            '>>> ' +
-              payload.map((b) => ('00' + b.toString(16)).slice(-2)).join(' '),
-          );
           resp = await NfcManager.nfcVHandler.transceive(payload);
-          console.log(
-            '<<< ' +
-              resp.map((b) => ('00' + b.toString(16)).slice(-2)).join(' '),
-          );
         } else if (type === 'delay') {
           await delay(payload);
         }
@@ -425,7 +401,6 @@ class NfcProxy {
         await onPostExecute([result, responses]);
       }
     } catch (ex) {
-      console.warn(ex);
       handleException(ex);
     } finally {
       NfcManager.cancelTechnologyRequest();
@@ -447,7 +422,7 @@ class NfcProxy {
 
       result = true;
     } catch (ex) {
-      console.warn(ex);
+      
       handleException(ex);
     } finally {
       NfcManager.cancelTechnologyRequest();
@@ -470,7 +445,7 @@ class NfcProxy {
 
       result = true;
     } catch (ex) {
-      console.warn(ex);
+      
       handleException(ex);
     } finally {
       NfcManager.cancelTechnologyRequest();
@@ -494,7 +469,7 @@ class NfcProxy {
       }
     } catch (ex) {
       // for tag reading, we don't actually need to show any error
-      console.log(ex);
+      
     } finally {
       NfcManager.cancelTechnologyRequest();
     }

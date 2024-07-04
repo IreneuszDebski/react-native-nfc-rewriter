@@ -124,7 +124,7 @@ function SavedRecordScreen(props) {
               removeIdx={removeIdx}
               goToHandler={goToHandler.bind(null, idx)}
               onCopy={() => {
-                console.warn(record);
+                
                 setRecordToCopy(record);
               }}
             />

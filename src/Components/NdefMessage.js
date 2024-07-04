@@ -104,7 +104,6 @@ class RtdUriPayload extends React.Component {
     try {
       await Linking.openURL(uri);
     } catch (ex) {
-      console.warn(ex);
       Alert.alert('Cannot open uri');
     }
   };

@@ -149,7 +149,7 @@ function HomeScreen(props) {
         });
         */
       } catch (ex) {
-        console.warn(ex);
+        
         Alert.alert('ERROR', 'Błąd inicjalizacji NFC', [{text: 'OK'}]);
       }
     }

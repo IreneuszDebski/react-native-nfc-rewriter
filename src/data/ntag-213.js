@@ -38,7 +38,7 @@ export function genEnablePasswordCommands(authPageIdx = 0x29) {
 
     onParameterChanged: ({parameters, commands}) => {
       const [password, pack, startBlock] = parameters;
-      console.log(password);
+      
       const nextCommands = cloneDeep(commands);
       nextCommands[1].payload[2] = pack.payload[0] || 0;
       nextCommands[1].payload[3] = pack.payload[1] || 0;

@@ -107,7 +107,7 @@ function CustomTransceiveScreen(props) {
 
     try {
       if (typeof params.savedRecord?.beforeTransceive === 'function') {
-        console.warn('setBeforeTransceive');
+        
         setBeforeTransceive(params.savedRecord?.beforeTransceive);
       }
 
@@ -128,9 +128,9 @@ function CustomTransceiveScreen(props) {
         );
       }
     } catch (ex) {
-      console.warn('executeCommands w unexpected ex', ex);
+      
     } finally {
-      console.warn('setBeforeTransceive back');
+
       setBeforeTransceive(null);
     }
 

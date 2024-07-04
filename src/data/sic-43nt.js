@@ -25,7 +25,7 @@ The 80 bits of KEY to generate the rolling code, which default format is 3-byte 
   },
   parameters: [{name: 'Prefix (3 bytes)', length: 3}],
   onParameterChanged: ({parameters, commands}) => {
-    console.warn(parameters);
+
     const [prefix] = parameters;
     _prefix = [...prefix.payload];
     return commands;
@@ -46,17 +46,17 @@ The 80 bits of KEY to generate the rolling code, which default format is 3-byte 
       const prefix = _prefix
         .map((byte) => ('00' + byte.toString(16)).slice(-2))
         .join('');
-      console.warn(uid, ts, code, prefix);
+      
       const endpoint = `https://2j6p8l98z5.execute-api.ap-northeast-1.amazonaws.com/prod/sic4310/sign?uid=${uid}&ts=${ts}&prefix=${prefix}`;
-      console.warn('endpoint', endpoint);
+      
       const result = await (await fetch(endpoint)).json();
-      console.warn('signed reuslt', result);
+      
       if (result.sig !== code) {
         throw new Error('sig error');
       }
       Alert.alert('Rolling code match!!');
     } catch (ex) {
-      console.warn(ex);
+      
       Alert.alert("Rolling code doesn't match!!");
     }
   },

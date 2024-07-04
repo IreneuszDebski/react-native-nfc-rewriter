@@ -20,7 +20,7 @@ function NfcPromptAndroid(props) {
       }).start();
     } else {
       Animated.timing(animValue, {
-        duration: 200,
+        duration: 100,
         toValue: 0,
         useNativeDriver: true,
       }).start(() => {
