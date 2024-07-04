@@ -129,8 +129,6 @@ class NfcProxy {
 
       tag = await NfcManager.getTag();
       tag.ndefStatus = await NfcManager.ndefHandler.getNdefStatus();
-      console.log('TAG');
-      console.log(tag);
 
 
       if (Platform.OS === 'ios') {

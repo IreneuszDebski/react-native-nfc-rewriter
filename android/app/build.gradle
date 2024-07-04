@@ -73,13 +73,13 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.washow.nfcopenrewriter"
+    namespace "com.aronax.agrotechnologynfc"
     defaultConfig {
-        applicationId "com.washow.nfcopenrewriter"
+        applicationId "com.aronax.agrotechnologynfc"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 2000 
-        versionName "0.2.0"
+        versionName "1.0.6"
     }
     signingConfigs {
         debug {

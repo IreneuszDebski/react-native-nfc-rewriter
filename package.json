@@ -1,8 +1,8 @@
 {
-  "name": "react-native-nfc-rewriter",
-  "version": "1.0.2",
+  "name": "agrotechnologynfc",
+  "version": "1.0.6",
   "private": true,
-  "revAppId": "com.revteltech.nfcopenrewriter",
+  "revAppId": "com.aronax.agrotechnologynfc",
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
@@ -12,7 +12,7 @@
     "android:clean": "cd android && ./gradlew clean",
     "android:bundle": "cd android && ./gradlew bundleRelease && cd .. && open android/app/build/outputs/bundle/release",
     "android:assemble": "cd android && ./gradlew assembleRelease && cd .. && open android/app/build/outputs/apk/release",
-    "android:start": "adb shell am start -n com.washow.nfcopenrewriter/.MainActivity"
+    "android:start": "adb shell am start -n com.aronax.agrotechnologynfc/.MainActivity"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.23.1",

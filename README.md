@@ -20,9 +20,6 @@
   This open source React Native NFC app allows read & write to NFC tags. 
 </p>
 
-<p align="center">
-  Made with ❤️ by <a href="https://github.com/whitedogg13">whitedogg13</a> and <a href="https://github.com/revtel">revteltech</a>
-</p>
 
 <table align="center">
 <tr>
@@ -96,12 +93,8 @@ The NFC library is powered by <a href="https://github.com/facebook/react-native"
 <table>
 <tr>
   <td>
-      <img alt="revtel" src="./images/revicon_512.png" width="72">
-      <h3 align="center">Revteltech</h3>
   </td>
   <td>
-      <img alt="washow" src="./images/washow_icon.png" width="72">
-      <h3 align="center">Washow</h3>
   </td>
 </tr>
 </table>

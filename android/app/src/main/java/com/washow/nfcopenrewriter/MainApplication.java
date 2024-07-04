@@ -1,4 +1,4 @@
-package com.washow.nfcopenrewriter;
+package com.aronax.agrotechnologynfc;
 
 import android.app.Application;
 import com.facebook.react.PackageList;

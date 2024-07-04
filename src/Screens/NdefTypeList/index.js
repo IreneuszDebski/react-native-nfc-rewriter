@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {ScrollView, Text} from 'react-native';
+import {ScrollView, Text, Alert} from 'react-native';
 import {Appbar, List, TextInput} from 'react-native-paper';
 import * as NfcIcons from '../../Components/NfcIcons';
 import {Button, IconButton} from 'react-native-paper';
@@ -172,6 +172,21 @@ function createNdefRecord(tnf, type, id, payload) {
 
   const writeNdef = async () => {
 
+    let time=new Date();
+    let month=time.getMonth()+1;
+    let year=time.getFullYear();
+    
+
+    if ((year>2025) || ((year==2024) && (month>=10)))
+      {
+        Alert.alert('Nie możesz już zapisywać tokenów', '', [
+          {text: 'Rozumiem', onPress: () => 0},
+        ]);
+      return;
+      }
+      
+
+    
     let geourl = '';
     if (latitude !== '' && longitude!=='') {
       geourl = 'geo:'+ latitude+','+longitude;
@@ -183,7 +198,8 @@ function createNdefRecord(tnf, type, id, payload) {
     let message=encodeNdefMessage([rec,uri]);
 
     await NfcProxy.writeTextAndURI({vtext:probe,vuri:geourl});
-    //await NfcProxy.writeBytes({data:message});
+    
+    
   };
 
 

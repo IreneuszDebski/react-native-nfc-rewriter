@@ -33,19 +33,6 @@ function RecordItem(props) {
             onPress={() => onCopy()}
           />
 
-          <IconButton
-            icon={() => (
-              <Icon name="share" size={22} style={{alignSelf: 'center'}} />
-            )}
-            onPress={() => {
-              Share.share({
-                title: 'My NFC Record',
-                url: `com.revteltech.nfcopenrewriter://share?data=${JSON.stringify(
-                  record,
-                )}`,
-              });
-            }}
-          />
 
           <IconButton
             icon={() => (

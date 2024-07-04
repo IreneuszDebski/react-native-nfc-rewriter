@@ -1,4 +1,4 @@
-package com.washow.nfcopenrewriter;
+package com.aronax.agrotechnologynfc;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;

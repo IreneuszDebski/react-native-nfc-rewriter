@@ -73,57 +73,6 @@ function ToolKitScreen(props) {
             }}
           />
           <List.Item
-            title="[NTAG2xx] Verify signature"
-            left={NfcIcons.TransceiveIcon}
-            onPress={async () => {
-              async function checkNxpSig({uid, sig}) {
-                const resp = await fetch(
-                  `https://badge-api.revtel2.com/badge/v2/nxp-sig-check?uid=${uid}&sig=${sig}`,
-                );
-
-                if (resp.status === 400) {
-                  throw new Error('invalid-nxp-sig');
-                } else if (resp.status !== 200) {
-                  throw new Error('unknown-nxp-sig');
-                }
-
-                return resp.json();
-              }
-
-              const tag = await NfcProxy.readNxpSigNtag2xx();
-
-              if (!tag) {
-                return;
-              }
-
-              const uid = tag.id;
-              const sig = tag.nxpBytes.reduce((acc, byte) => {
-                // eslint-disable-next-line no-bitwise
-                return acc + ('0' + (byte & 0xff).toString(16)).slice(-2);
-              }, '');
-
-              if (!sig) {
-                Alert.alert('Fail to obtain NXP Signature');
-                return;
-              }
-
-              try {
-                await checkNxpSig({uid, sig});
-                Alert.alert('Success', 'NXP signature is correct');
-              } catch (ex) {
-                if (ex?.message === 'invalid-nxp-sig') {
-                  Alert.alert('Failure', 'NXP signature is invalid');
-                } else {
-                  Alert.alert(
-                    'Warning',
-                    'cannot verify NXP signature right now, please try again later',
-                  );
-                }
-                console.warn(ex);
-              }
-            }}
-          />
-          <List.Item
             title="[NTAG213] Enable password"
             left={NfcIcons.TransceiveIcon}
             onPress={() => {

@@ -2,6 +2,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.NFC" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
 
     <application
       android:name=".MainApplication"
@@ -24,14 +26,14 @@
             <action android:name="android.intent.action.VIEW" />
             <category android:name="android.intent.category.DEFAULT" />
             <category android:name="android.intent.category.BROWSABLE" />
-            <data android:scheme="com.revteltech.nfcopenrewriter"
+            <data android:scheme="com.aronax.agrotechnologynfc"
                   android:host="*" />
         </intent-filter>
         <intent-filter>
             <action android:name="android.intent.action.VIEW" />
             <category android:name="android.intent.category.DEFAULT" />
             <category android:name="android.intent.category.BROWSABLE" />
-            <data android:scheme="com.washow.nfcopenrewriter"
+            <data android:scheme="com.aronax.agrotechnologynfc"
                   android:host="*" />
         </intent-filter>
         <intent-filter>

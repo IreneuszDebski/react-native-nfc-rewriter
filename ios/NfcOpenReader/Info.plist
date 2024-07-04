@@ -28,20 +28,20 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>com.revteltech.nfcopenrewriter</string>
+			<string>com.aronax.agrotechnologynfc</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.revteltech.nfcopenrewriter</string>
+				<string>com.aronax.agrotechnologynfc</string>
 			</array>
 		</dict>
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>com.washow.nfcopenrewriter</string>
+			<string>com.aronax.agrotechnologynfc</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.washow.nfcopenrewriter</string>
+				<string>com.aronax.agrotechnologynfc</string>
 			</array>
 		</dict>
 	</array>

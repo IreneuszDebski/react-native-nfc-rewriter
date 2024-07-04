@@ -504,8 +504,8 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.revteltech.nfcopenrewriter;
-				PRODUCT_NAME = NfcOpenReader;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aronax.agrotechnologynfc
+				PRODUCT_NAME = AgroTechnology NFC;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -532,8 +532,8 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.revteltech.nfcopenrewriter;
-				PRODUCT_NAME = NfcOpenReader;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aronax.agrotechnologynfc;
+				PRODUCT_NAME = AgroTechnology NFC;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
